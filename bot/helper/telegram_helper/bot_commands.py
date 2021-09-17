@@ -9,6 +9,12 @@ class _BotCommands:
         self.CancelAllCommand = 'cancelall'
         self.ListCommand = 'list'
         self.StatusCommand = 'status'
+        self.AuthorizedUsersCommand = 'users'
+        self.AuthorizeCommand = 'authorize'
+        self.UnAuthorizeCommand = 'unauthorize'
+        self.AddSudoCommand = 'addsudo'
+        self.RmSudoCommand = 'rmsudo'
+        self.PingCommand = 'ping'
         self.RestartCommand = 'restart'
         self.StatsCommand = 'stats'
         self.HelpCommand = 'help'
@@ -24,7 +30,7 @@ class _BotCommands:
         self.QbTarMirrorCommand = 'qbtarmirror'
         self.QbZipMirrorCommand = 'qbzipmirror'
         self.DeleteCommand = 'del'
-        
-        
+        self.ShellCommand = 'shell'
+        self.ExecHelpCommand = 'exechelp'
 
 BotCommands = _BotCommands()
