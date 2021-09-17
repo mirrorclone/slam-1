@@ -69,31 +69,10 @@ def delete_all_messages():
 def update_all_messages():
     total, used, free = shutil.disk_usage('.')
     free = get_readable_file_size(free)
-    currentTime = get_readable_time(time.time() - botStartTime)
     msg, buttons = get_readable_message()
     if msg is None:
         return
-    msg += f"<b>CPU:</b> <code>{psutil.cpu_percent()}%</code>" \
-           f" <b>RAM:</b> <code>{psutil.virtual_memory().percent}%</code>" \
-           f" <b>DISK:</b> <code>{psutil.disk_usage('/').percent}%</code>"
-    with download_dict_lock:
-        dlspeed_bytes = 0
-        uldl_bytes = 0
-        for download in list(download_dict.values()):
-            speedy = download.speed()
-            if download.status() == MirrorStatus.STATUS_DOWNLOADING:
-                if 'K' in speedy:
-                    dlspeed_bytes += float(speedy.split('K')[0]) * 1024
-                elif 'M' in speedy:
-                    dlspeed_bytes += float(speedy.split('M')[0]) * 1048576 
-            if download.status() == MirrorStatus.STATUS_UPLOADING:
-                if 'KB/s' in speedy:
-            	    uldl_bytes += float(speedy.split('K')[0]) * 1024
-                elif 'MB/s' in speedy:
-                    uldl_bytes += float(speedy.split('M')[0]) * 1048576
-        dlspeed = get_readable_file_size(dlspeed_bytes)
-        ulspeed = get_readable_file_size(uldl_bytes)
-        msg += f"\n<b>FREE:</b> <code>{free}</code> | <b>UPTIME:</b> <code>{currentTime}</code>\n<b>DL:</b> <code>{dlspeed}/s</code> 🔻 | <b>UL:</b> <code>{ulspeed}/s</code> 🔺\n"
+    msg += f"\n<b>💽 ғʀᴇᴇ:</b> {free}\n"
     with status_reply_dict_lock:
         for chat_id in list(status_reply_dict.keys()):
             if status_reply_dict[chat_id] and msg != status_reply_dict[chat_id].text:
@@ -112,31 +91,10 @@ def sendStatusMessage(msg, bot):
         Interval.append(setInterval(DOWNLOAD_STATUS_UPDATE_INTERVAL, update_all_messages))
     total, used, free = shutil.disk_usage('.')
     free = get_readable_file_size(free)
-    currentTime = get_readable_time(time.time() - botStartTime)
     progress, buttons = get_readable_message()
     if progress is None:
         progress, buttons = get_readable_message()
-    progress += f"<b>CPU:</b> <code>{psutil.cpu_percent()}%</code>" \
-           f" <b>RAM:</b> <code>{psutil.virtual_memory().percent}%</code>" \
-           f" <b>DISK:</b> <code>{psutil.disk_usage('/').percent}%</code>"
-    with download_dict_lock:
-        dlspeed_bytes = 0
-        uldl_bytes = 0
-        for download in list(download_dict.values()):
-            speedy = download.speed()
-            if download.status() == MirrorStatus.STATUS_DOWNLOADING:
-                if 'K' in speedy:
-                    dlspeed_bytes += float(speedy.split('K')[0]) * 1024
-                elif 'M' in speedy:
-                    dlspeed_bytes += float(speedy.split('M')[0]) * 1048576 
-            if download.status() == MirrorStatus.STATUS_UPLOADING:
-                if 'KB/s' in speedy:
-            	    uldl_bytes += float(speedy.split('K')[0]) * 1024
-                elif 'MB/s' in speedy:
-                    uldl_bytes += float(speedy.split('M')[0]) * 1048576
-        dlspeed = get_readable_file_size(dlspeed_bytes)
-        ulspeed = get_readable_file_size(uldl_bytes)
-        progress += f"\n<b>FREE:</b> <code>{free}</code> | <b>UPTIME:</b> <code>{currentTime}</code>\n<b>DL:</b> <code>{dlspeed}/s</code> 🔻 | <b>UL:</b> <code>{ulspeed}/s</code> 🔺\n"
+    progress += f"\n<b>💽 ғʀᴇᴇ:</b> {free}\n"
     with status_reply_dict_lock:
         if msg.message.chat.id in list(status_reply_dict.keys()):
             try:
