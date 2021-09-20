@@ -118,11 +118,11 @@ def get_readable_message():
                     MirrorStatus.STATUS_EXTRACTING,
                 ]:                 
                     if download.status() == MirrorStatus.STATUS_CLONING:
-                        msg += f"\n<b>♻️ ᴄʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
+                        msg += f"\n<b>♻️ ᴄʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code>/<code>{download.size()}</code>"
                     elif download.status() == MirrorStatus.STATUS_UPLOADING:
-                        msg += f"\n<b>📤 ᴜʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
+                        msg += f"\n<b>📤 ᴜʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code>/<code>{download.size()}</code>"
                     else:
-                        msg += f"\n<b>📥 ᴅʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
+                        msg += f"\n<b>📥 ᴅʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code>/<code>{download.size()}</code>"
                     msg += f"\n<b>🚀 sᴘᴇᴇᴅ:</b> <code>{download.speed()}</code>"
                     msg += f"\n<b>⏲ ᴇᴛᴀ:</b> <code>{download.eta()}</code> "
                     # if hasattr(download, 'is_torrent'):
