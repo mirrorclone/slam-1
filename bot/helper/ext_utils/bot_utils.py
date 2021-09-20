@@ -132,7 +132,7 @@ def get_readable_message():
             INDEX += 1
             if INDEX > COUNT:
                 msg += f"\n<b>📁 ғɪʟᴇɴᴀᴍᴇ:</b> <code>{download.name()}</code>"
-                msg += f"\n<b>📈 ѕтαтυѕ 📉:</b> <i>{download.status()}</i>"
+                msg += f"\n<b>🚦 ѕтαтυѕ:</b> <i>{download.status()}</i>"
                 if download.status() not in [
                     MirrorStatus.STATUS_ARCHIVING,
                     MirrorStatus.STATUS_EXTRACTING,
@@ -145,7 +145,7 @@ def get_readable_message():
                     else:
                         msg += f"\n<b>📥 ᴅᴏᴡɴ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code> of <code>{download.size()}</code>"
                     msg += f"\n<b>🚀 sᴘᴇᴇᴅ:</b> <code>{download.speed()}</code>"
-                    msg += f"\n<b>⏳ ᴇᴛᴀ:</b> <code>{download.eta()}</code> "
+                    msg += f"\n<b>⏲ ᴇᴛᴀ:</b> <code>{download.eta()}</code> "
                     # if hasattr(download, 'is_torrent'):
                     try:
                         msg += f"\n<b>🌱 sᴇᴇᴅs:</b> <code>{download.aria_download().num_seeders}</code>" \
