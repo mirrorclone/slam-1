@@ -29,6 +29,8 @@ class MirrorStatus:
     STATUS_PAUSE = "ᴘᴀᴜsᴇᴅ ⭕️"
     STATUS_ARCHIVING = "ᴀʀᴄʜɪᴠᴇ 🔐"
     STATUS_EXTRACTING = "ᴇxᴛʀᴀᴄᴛ 📂"
+    
+SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
 
 class setInterval:
