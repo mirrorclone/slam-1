@@ -72,7 +72,7 @@ def update_all_messages():
     msg, buttons = get_readable_message()
     if msg is None:
         return
-    msg += f"\n<b>💽 ғʀᴇᴇ:</b> {free}\n"
+    msg += f"\n<b>💽 ғʀᴇᴇ:</b> {free}"
     with status_reply_dict_lock:
         for chat_id in list(status_reply_dict.keys()):
             if status_reply_dict[chat_id] and msg != status_reply_dict[chat_id].text:
@@ -94,7 +94,7 @@ def sendStatusMessage(msg, bot):
     progress, buttons = get_readable_message()
     if progress is None:
         progress, buttons = get_readable_message()
-    progress += f"\n<b>💽 ғʀᴇᴇ:</b> {free}\n"
+    progress += f"\n<b>💽 ғʀᴇᴇ:</b> {free}"
     with status_reply_dict_lock:
         if msg.message.chat.id in list(status_reply_dict.keys()):
             try:
