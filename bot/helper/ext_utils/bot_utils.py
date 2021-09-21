@@ -111,7 +111,8 @@ def get_readable_message():
         for download in list(download_dict.values()):
             INDEX += 1
             if INDEX > COUNT:
-                msg += f"\n<b>🚦 sᴛᴀᴛᴜs:</b> <i>{download.status()}</i> {download.progress()}"
+                msg += f"<b>✥═════ ᴀᴢᴍɪʀʀᴏʀ ═════✥</b>"
+                msg += f"\n\n<b>🚦 sᴛᴀᴛᴜs:</b> <i>{download.status()}</i> {download.progress()}"
                 msg += f"\n<b>📁 ғɪʟᴇɴᴀᴍᴇ:</b> <code>{download.name()}</code>"       
                 if download.status() not in [
                     MirrorStatus.STATUS_ARCHIVING,
@@ -136,7 +137,7 @@ def get_readable_message():
                             f" | <b>🧲 ʟᴇᴇᴄʜ:</b> <code>{download.torrent_info().num_leechs}</code>"
                     except:
                         pass
-                    msg += f"\n<b>⛔ ᴄᴀɴᴄᴇʟ:</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n<b>╍╍╍╍╍╍╍╍╍✓╍╍╍╍╍╍╍╍╍</b>"
+                    msg += f"\n<b>⛔ ᴄᴀɴᴄᴇʟ:</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
                 msg += "\n"
                 if STATUS_LIMIT is not None and INDEX >= COUNT + STATUS_LIMIT:
                     break
