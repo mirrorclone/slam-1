@@ -80,16 +80,12 @@ class TgUploader:
                                                               progress=self.upload_progress)
                     if self.thumb is None and thumb is not None and os.path.lexists(thumb):
                         os.remove(thumb)
-                elif file.upper().endswith(AUDIO_SUFFIXES):
-                    title = None
-                    artist = None
+                elif file.upper().endswith(AUDIO_SUFFIXES):              
                     metadata = extractMetadata(createParser(up_path))
                     if metadata.has("duration"):
                         duration = metadata.get('duration').seconds
-                    if metadata.has("title"):
-                        title = metadata.get("title")
-                    if metadata.has("artist"):
-                        artist = metadata.get("artist")
+                    title = metadata.get("title") if metadata.has("title") else None
+                    artist = metadata.get("artist") if metadata.has("artist") else None
                     self.sent_msg = self.sent_msg.reply_audio(audio=up_path,
                                                               quote=True,
                                                               caption=file,
