@@ -32,11 +32,11 @@ def leechSet(update, context):
     msg += "\nCustom Thmubnail "
     msg += "exists" if os.path.exists(path) else "not exists"
     buttons = button_build.ButtonMaker()
-    buttons.sbutton("As Document", f"doc {user_id}")
-    buttons.sbutton("As Media", f"med {user_id}")
-    buttons.sbutton("Delete Thumbnail", f"thumb {user_id}")
+    buttons.sbutton("📁 As Document", f"doc {user_id}")
+    buttons.sbutton("🎞 As Video", f"med {user_id}")
+    buttons.sbutton("💢 Delete Thumbnail", f"thumb {user_id}")
     if AUTO_DELETE_MESSAGE_DURATION == -1:
-        buttons.sbutton("Close", f"closeset {user_id}")
+        buttons.sbutton("🔒 Close", f"closeset {user_id}")
     button = InlineKeyboardMarkup(buttons.build_menu(2))
     choose_msg = sendMarkup(msg, context.bot, update, button)
     threading.Thread(target=auto_delete_message, args=(context.bot, update.message, choose_msg)).start()
@@ -68,7 +68,7 @@ def setLeechType(update, context):
             AS_MEDIA_USERS.add(user_id)
             query.answer(text="Done!", show_alert=True)
         elif user_id in AS_MEDIA_USERS or not AS_DOCUMENT:
-            query.answer(text="Already As Media!", show_alert=True)
+            query.answer(text="Already As Video!", show_alert=True)
         else:
             AS_MEDIA_USERS.add(user_id)
             query.answer(text="Done!", show_alert=True)
