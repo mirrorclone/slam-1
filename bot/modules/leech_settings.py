@@ -19,7 +19,7 @@ from bot.helper.telegram_helper import button_build
 def leechSet(update, context):
     user_id = update.message.from_user.id
     first_name = update.message.from_user.first_name
-    path = f"Thumbnails/{user_id}.jpg"
+    path = f"Thumbnails/{first_name}.jpg"
     msg = f"Files Format for {user_id} user = "
     if (
         user_id in AS_DOC_USERS
