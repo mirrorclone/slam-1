@@ -45,7 +45,7 @@ def setLeechType(update, context):
     first_name = query.from_user.first_name
     data = query.data
     data = data.split(" ")
-    if user_id != int(data[1]):
+    if first_name != int(data[1]):
         query.answer(text="🚫 Not Yours!", show_alert=True)
     elif data[0] == "doc":
         if (
@@ -56,7 +56,7 @@ def setLeechType(update, context):
             query.answer(text="Already As Document!", show_alert=True)
         elif first_name in AS_MEDIA_USERS:
             AS_MEDIA_USERS.remove(first_name)
-            AS_DOC_USERS.add(user_id)
+            AS_DOC_USERS.add(first_name)
             query.answer(text="✅ Done!", show_alert=True)
         else:
             AS_DOC_USERS.add(first_name)
@@ -72,7 +72,7 @@ def setLeechType(update, context):
             AS_MEDIA_USERS.add(first_name)
             query.answer(text="✅ Done!", show_alert=True)
     elif data[0] == "thumb":
-        path = f"Thumbnails/{user_id}.jpg"
+        path = f"Thumbnails/{first_name}.jpg"
         if os.path.lexists(path):
             os.remove(path)
             query.answer(text="✅ Done!", show_alert=True)
