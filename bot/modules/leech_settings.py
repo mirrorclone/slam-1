@@ -17,13 +17,12 @@ from bot.helper.telegram_helper import button_build
 
 
 def leechSet(update, context):
-    user_id = update.message.from_user.id
     first_name = update.message.from_user.first_name
     path = f"Thumbnails/{first_name}.jpg"
-    msg = f"Files Format for {user_id} user = "
+    msg = f"Files Format for {first_name} = "
     if (
-        user_id in AS_DOC_USERS
-        or user_id not in AS_MEDIA_USERS
+        first_name in AS_DOC_USERS
+        or first_name not in AS_MEDIA_USERS
         and AS_DOCUMENT
     ):
         msg += "As DOCUMENT"
@@ -32,45 +31,45 @@ def leechSet(update, context):
     msg += "\nCustom Thmubnail "
     msg += "exists" if os.path.exists(path) else "not exists"
     buttons = button_build.ButtonMaker()
-    buttons.sbutton("📁 As Document", f"doc {user_id}")
-    buttons.sbutton("🎞 As Streamable", f"med {user_id}")
-    buttons.sbutton("💢 Delete Thumbnail", f"thumb {user_id}")
+    buttons.sbutton("📁 As Document", f"doc {first_name}")
+    buttons.sbutton("🎞 As Streamable", f"med {first_name}")
+    buttons.sbutton("💢 Delete Thumbnail", f"thumb {first_name}")
     if AUTO_DELETE_MESSAGE_DURATION == -1:
-        buttons.sbutton("🔒 Close", f"closeset {user_id}")
+        buttons.sbutton("🔒 Close", f"closeset {first_name}")
     button = InlineKeyboardMarkup(buttons.build_menu(2))
     choose_msg = sendMarkup(msg, context.bot, update, button)
     threading.Thread(target=auto_delete_message, args=(context.bot, update.message, choose_msg)).start()
 
 def setLeechType(update, context):
     query = update.callback_query
-    user_id = query.from_user.id
+    first_name = query.from_user.first_name
     data = query.data
     data = data.split(" ")
     if user_id != int(data[1]):
         query.answer(text="🚫 Not Yours!", show_alert=True)
     elif data[0] == "doc":
         if (
-            user_id in AS_DOC_USERS
-            or user_id not in AS_MEDIA_USERS
+            first_name in AS_DOC_USERS
+            or first_name not in AS_MEDIA_USERS
             and AS_DOCUMENT
         ):
             query.answer(text="Already As Document!", show_alert=True)
-        elif user_id in AS_MEDIA_USERS:
-            AS_MEDIA_USERS.remove(user_id)
+        elif first_name in AS_MEDIA_USERS:
+            AS_MEDIA_USERS.remove(first_name)
             AS_DOC_USERS.add(user_id)
             query.answer(text="✅ Done!", show_alert=True)
         else:
-            AS_DOC_USERS.add(user_id)
+            AS_DOC_USERS.add(first_name)
             query.answer(text="✅ Done!", show_alert=True)
     elif data[0] == "med":
-        if user_id in AS_DOC_USERS:
-            AS_DOC_USERS.remove(user_id)
-            AS_MEDIA_USERS.add(user_id)
+        if first_name in AS_DOC_USERS:
+            AS_DOC_USERS.remove(first_name)
+            AS_MEDIA_USERS.add(first_name)
             query.answer(text="✅ Done!", show_alert=True)
-        elif user_id in AS_MEDIA_USERS or not AS_DOCUMENT:
+        elif first_name in AS_MEDIA_USERS or not AS_DOCUMENT:
             query.answer(text="Already As Video!", show_alert=True)
         else:
-            AS_MEDIA_USERS.add(user_id)
+            AS_MEDIA_USERS.add(first_name)
             query.answer(text="✅ Done!", show_alert=True)
     elif data[0] == "thumb":
         path = f"Thumbnails/{user_id}.jpg"
