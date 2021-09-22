@@ -108,15 +108,15 @@ def get_readable_message():
             if PAGE_NO > pages and pages != 0:
                 globals()['COUNT'] -= STATUS_LIMIT
                 globals()['PAGE_NO'] -= 1
-        for download in list(download_dict.values()):
-            INDEX += 1
-            if INDEX > COUNT:
+            start = COUNT
+        for index, download in enumerate(list(download_dict.values())[start:], start=1):
                 msg += f"\n<b>✥════ ᴀᴢᴍɪʀʀᴏʀ ════✥</b>"
                 msg += f"\n\n<b>📝 sᴛᴀᴛᴜs:</b> <i>{download.status()}</i> {download.progress()}"
                 msg += f"\n<b>📁 ғɪʟᴇɴᴀᴍᴇ:</b> <code>{download.name()}</code>"       
                 if download.status() not in [
                     MirrorStatus.STATUS_ARCHIVING,
                     MirrorStatus.STATUS_EXTRACTING,
+                    MirrorStatus.STATUS_SPLITTING
                 ]:                 
                     if download.status() == MirrorStatus.STATUS_CLONING:
                         msg += f"\n<b>♻️ ᴄʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code><b>/</b><code>{download.size()}</code>"
@@ -145,18 +145,15 @@ def get_readable_message():
                 msg += "\n"
                 if STATUS_LIMIT is not None and INDEX >= COUNT + STATUS_LIMIT:
                     break
-        if STATUS_LIMIT is not None:
-            if INDEX > COUNT + STATUS_LIMIT:
-                return None, None
+        if STATUS_LIMIT is not None:         
             if dick_no > STATUS_LIMIT:
-                msg += f"<b>Page:</b> <code>{PAGE_NO}/{pages}</code> | <b>Tasks:</b> <code>{dick_no}</code>\n"
+                msg += f"<b>Page:</b> {PAGE_NO}/{pages} | <b>Tasks:</b> {dick_no}\n"
                 buttons = button_build.ButtonMaker()
                 buttons.sbutton("⬅️", "pre")
                 buttons.sbutton("➡️", "nex")
                 button = InlineKeyboardMarkup(buttons.build_menu(2))
                 return msg, button
         return msg, ""
-
 
 def flip(update, context):
     query = update.callback_query
@@ -177,7 +174,6 @@ def flip(update, context):
             COUNT -= STATUS_LIMIT
             PAGE_NO -= 1
     message_utils.update_all_messages()
-
 
 def check_limit(size, limit, tar_unzip_limit=None, is_tar_ext=False):
     LOGGER.info('Checking File/Folder Size...')
@@ -211,19 +207,15 @@ def get_readable_time(seconds: int) -> str:
     result += f'{seconds}s'
     return result
 
-
 def is_url(url: str):
     url = re.findall(URL_REGEX, url)
     return bool(url)
 
-
 def is_gdrive_link(url: str):
     return "drive.google.com" in url
 
-
 def is_mega_link(url: str):
     return "mega.nz" in url or "mega.co.nz" in url
-
 
 def get_mega_link_type(url: str):
     if "folder" in url:
@@ -234,11 +226,9 @@ def get_mega_link_type(url: str):
         return "folder"
     return "file"
 
-
 def is_magnet(url: str):
     magnet = re.findall(MAGNET_REGEX, url)
     return bool(magnet)
-
 
 def new_thread(fn):
     """To use as decorator to make a function call threaded.
