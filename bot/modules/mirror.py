@@ -205,12 +205,12 @@ class MirrorListener(listeners.MirrorListeners):
             chat_id = str(self.message.chat.id)
             count = len(files)
             if OWNER_ID  == int(chat_id):
-                msg = f'<b>📂 Filename:</b> {link}\n'
+                msg = f'<b>📂 Name:</b> {link}\n'
                 msg += f'<b>🗄 Total Files:</b> {count}'
                 sendMessage(msg, self.bot, self.update)
             else:
                 chat_id = chat_id[4:]
-                msg = f"<b>📂 Filename:</b> <a href='https://t.me/c/{chat_id}/{self.uid}'>{link}</a>\n"
+                msg = f"<b>📂 Name:</b> <a href='https://t.me/c/{chat_id}/{self.uid}'>{link}</a>\n"
                 msg += f'<b>🗄 Total Files:</b> {count}\n'
                 msg += f'👤 cc: {uname}\n\n'
                 fmsg = ''
@@ -236,7 +236,7 @@ class MirrorListener(listeners.MirrorListeners):
                 update_all_messages()
             return
         with download_dict_lock:
-            msg = f'<b>📂 Filename: </b><code>{download_dict[self.uid].name()}</code>\n<b>💽 Size: </b><code>{size}</code>'
+            msg = f'<b>📂 Name: </b><code>{download_dict[self.uid].name()}</code>\n<b>💽 Size: </b><code>{size}</code>'
             if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                 msg += '\n<b>📇 Type: </b><code>Folder</code>'
                 msg += f'\n<b>🗃 SubFolders: </b><code>{folders}</code>'
