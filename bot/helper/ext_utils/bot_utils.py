@@ -21,7 +21,7 @@ PAGE_NO = 1
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "ᴜᴘʟᴏᴀᴅ...⏫"
+    STATUS_UPLOADING = "ᴜᴘʟᴅ...⏫"
     STATUS_DOWNLOADING = "ᴅᴏᴡɴ...⏬"
     STATUS_CLONING = "ᴄʟᴏɴɪɴɢ ♻️"
     STATUS_WAITING = "ϙᴜᴇᴜᴇᴅ 📝"
