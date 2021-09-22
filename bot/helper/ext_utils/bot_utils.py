@@ -145,14 +145,13 @@ def get_readable_message():
                 msg += "\n"
                 if STATUS_LIMIT is not None and INDEX >= COUNT + STATUS_LIMIT:
                     break
-        if STATUS_LIMIT is not None:         
-            if dick_no > STATUS_LIMIT:
-                msg += f"<b>Page:</b> {PAGE_NO}/{pages} | <b>Tasks:</b> {dick_no}\n"
-                buttons = button_build.ButtonMaker()
-                buttons.sbutton("⬅️", "pre")
-                buttons.sbutton("➡️", "nex")
-                button = InlineKeyboardMarkup(buttons.build_menu(2))
-                return msg, button
+        if STATUS_LIMIT is not None and dick_no > STATUS_LIMIT:
+            msg += f"<b>Page:</b> <code>{PAGE_NO}</code>/<code>{pages}</code> | <b>Tasks:</b> <code>{dick_no}</code>\n"
+            buttons = button_build.ButtonMaker()
+            buttons.sbutton("Previous", "pre")
+            buttons.sbutton("Next", "nex")
+            button = InlineKeyboardMarkup(buttons.build_menu(2))
+            return msg, button
         return msg, ""
 
 def flip(update, context):
