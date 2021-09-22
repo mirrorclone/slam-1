@@ -119,26 +119,26 @@ def get_readable_message():
                     MirrorStatus.STATUS_SPLITTING
                 ]:                 
                     if download.status() == MirrorStatus.STATUS_CLONING:
-                        msg += f"\n<b>♻️ ᴄʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code><b>/</b><code>{download.size()}</code>"
+                        msg += f"\n<b>♻️ ᴄʟ:</b> {get_readable_file_size(download.processed_bytes())}<b>/</b>{download.size()}"
                     elif download.status() == MirrorStatus.STATUS_UPLOADING:
-                        msg += f"\n<b>📤 ᴜʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code><b>/</b><code>{download.size()}</code>"
+                        msg += f"\n<b>📤 ᴜʟ:</b> {get_readable_file_size(download.processed_bytes())}<b>/</b>{download.size()}"
                     else:
-                        msg += f"\n<b>📥 ᴅʟ:</b> <code>{get_readable_file_size(download.processed_bytes())}</code><b>/</b><code>{download.size()}</code>"
-                    msg += f"\n<b>🚀 sᴘᴇᴇᴅ:</b> <code>{download.speed()}</code>"
-                    msg += f"\n<b>⏲ ᴇᴛᴀ:</b> <code>{download.eta()}</code> "
+                        msg += f"\n<b>📥 ᴅʟ:</b> {get_readable_file_size(download.processed_bytes())}<b>/</b>{download.size()}"
+                    msg += f"\n<b>🚀 sᴘᴇᴇᴅ:</b> {download.speed()}"
+                    msg += f"\n<b>⏲ ᴇᴛᴀ:</b> {download.eta()}"
                     # if hasattr(download, 'is_torrent'):
                     try:
                         msg += f"\n<b>👤 ᴜsᴇʀ:</b> {download.message.from_user.first_name} ({download.message.from_user.id})"
                     except:
                         pass   
                     try:
-                        msg += f"\n<b>🌱 sᴇᴇᴅs:</b> <code>{download.aria_download().num_seeders}</code>" \
-                            f" | <b>🧲 ᴘᴇᴇʀs:</b> <code>{download.aria_download().connections}</code>"
+                        msg += f"\n<b>🌱 sᴇᴇᴅs:</b> {download.aria_download().num_seeders}" \
+                            f" | <b>🧲 ᴘᴇᴇʀs:</b> {download.aria_download().connections}"
                     except:
                         pass
                     try:
-                        msg += f"\n<b>🌱 sᴇᴇᴅs:</b> <code>{download.torrent_info().num_seeds}</code>" \
-                            f" | <b>🧲 ʟᴇᴇᴄʜ:</b> <code>{download.torrent_info().num_leechs}</code>"
+                        msg += f"\n<b>🌱 sᴇᴇᴅs:</b> {download.torrent_info().num_seeds}" \
+                            f" | <b>🧲 ʟᴇᴇᴄʜ:</b> {download.torrent_info().num_leechs}"
                     except:
                         pass
                     msg += f"\n<b>⛔ ᴄᴀɴᴄᴇʟ:</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"
