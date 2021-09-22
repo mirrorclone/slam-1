@@ -149,7 +149,7 @@ def get_readable_message():
             msg += f"<b>📖 Page:</b> <code>{PAGE_NO}</code>/<code>{pages}</code> | <b>📄 Tasks:</b> <code>{dick_no}</code>\n"
             buttons = button_build.ButtonMaker()
             buttons.sbutton("⬅️", "pre")
-                buttons.sbutton("➡️", "nex")
+            buttons.sbutton("➡️", "nex")
             button = InlineKeyboardMarkup(buttons.build_menu(2))
             return msg, button
         return msg, ""
