@@ -70,8 +70,6 @@ def update_all_messages():
     total, used, free = shutil.disk_usage('.')
     free = get_readable_file_size(free)
     msg, buttons = get_readable_message()
-    if msg is None:
-        return
     msg += f"\n<b>💽 ғʀᴇᴇ:</b> {free}\n"
     with status_reply_dict_lock:
         for chat_id in list(status_reply_dict.keys()):
