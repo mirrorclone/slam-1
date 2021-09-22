@@ -83,7 +83,7 @@ def setLeechType(update, context):
         query.message.delete()
 
 def setThumb(update, context):
-    user_id = update.message.from_user.id
+    first_name = update.message.from_user.first_name
     reply_to = update.message.reply_to_message
     if reply_to is not None and reply_to.photo:
         path = "Thumbnails"
@@ -91,7 +91,7 @@ def setThumb(update, context):
             os.mkdir(path)
         photo_msg = app.get_messages(update.message.chat.id, reply_to_message_ids=update.message.message_id)
         photo_dir = app.download_media(photo_msg, file_name=path)
-        des_dir = os.path.join(path, str(user_id) + ".jpg")
+        des_dir = os.path.join(path, str(first_name) + ".jpg")
         # Image.open(photo_dir).convert("RGB").save(photo_dir)
         img = Image.open(photo_dir)
         w, h = img.size
