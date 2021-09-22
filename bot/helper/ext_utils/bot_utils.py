@@ -29,7 +29,7 @@ class MirrorStatus:
     STATUS_PAUSE = "ᴘᴀᴜsᴇᴅ ⭕️"
     STATUS_ARCHIVING = "ᴀʀᴄʜɪᴠᴇ 🔐"
     STATUS_EXTRACTING = "ᴇxᴛʀᴀᴄᴛ 📂"
-    STATUS_SPLITTING = "sᴘʟɪᴛ✂️"
+    STATUS_SPLITTING = "sᴘʟɪᴛ ✂️"
     
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
