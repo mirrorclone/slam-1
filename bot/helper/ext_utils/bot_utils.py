@@ -128,7 +128,7 @@ def get_readable_message():
                     msg += f"\n<b>⏲ ᴇᴛᴀ:</b> {download.eta()}"
                     # if hasattr(download, 'is_torrent'):
                     try:
-                        msg += f"\n<b>👤 ᴜsᴇʀ:</b> {download.message.from_user.first_name} ({download.message.from_user.id})"
+                        msg += f"\n<b>👤 ᴜsᴇʀ:</b> {download.message.from_user.first_name}"
                     except:
                         pass   
                     try:
