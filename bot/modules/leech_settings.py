@@ -18,8 +18,9 @@ from bot.helper.telegram_helper import button_build
 
 def leechSet(update, context):
     user_id = update.message.from_user.id
+    first_name = update.message.from_user.first_name
     path = f"Thumbnails/{user_id}.jpg"
-    msg = f"Files Format for {user_id} = "
+    msg = f"Files Format for {first_name} = "
     if (
         user_id in AS_DOC_USERS
         or user_id not in AS_MEDIA_USERS
@@ -53,11 +54,11 @@ def setLeechType(update, context):
             or user_id not in AS_MEDIA_USERS
             and AS_DOCUMENT
         ):
-            query.answer(text="Already As Document!", show_alert=True)
+            query.answer(text="👍🏻 Already As Document!", show_alert=True)
         elif user_id in AS_MEDIA_USERS:
             AS_MEDIA_USERS.remove(user_id)
             AS_DOC_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="✅ Done!", show_alert=True)
         else:
             AS_DOC_USERS.add(user_id)
             query.answer(text="✅ Done!", show_alert=True)
@@ -67,7 +68,7 @@ def setLeechType(update, context):
             AS_MEDIA_USERS.add(user_id)
             query.answer(text="✅ Done!", show_alert=True)
         elif user_id in AS_MEDIA_USERS or not AS_DOCUMENT:
-            query.answer(text="Already As Media!", show_alert=True)
+            query.answer(text="👍🏻 Already As Streamable!", show_alert=True)
         else:
             AS_MEDIA_USERS.add(user_id)
             query.answer(text="✅ Done!", show_alert=True)
