@@ -20,20 +20,20 @@ def leechSet(update, context):
     user_id = update.message.from_user.id
     first_name = update.message.from_user.first_name
     path = f"Thumbnails/{user_id}.jpg"
-    msg = f"Leech Type for {user_id} user is "
+    msg = f"Files Format for {user_id} user = "
     if (
         user_id in AS_DOC_USERS
         or user_id not in AS_MEDIA_USERS
         and AS_DOCUMENT
     ):
-        msg += "DOCUMENT"
+        msg += "As DOCUMENT"
     else:
-        msg += "MEDIA"
+        msg += "As STREAMABLE"
     msg += "\nCustom Thmubnail "
     msg += "exists" if os.path.exists(path) else "not exists"
     buttons = button_build.ButtonMaker()
     buttons.sbutton("📁 As Document", f"doc {user_id}")
-    buttons.sbutton("🎞 As Video", f"med {user_id}")
+    buttons.sbutton("🎞 As Streamable", f"med {user_id}")
     buttons.sbutton("💢 Delete Thumbnail", f"thumb {user_id}")
     if AUTO_DELETE_MESSAGE_DURATION == -1:
         buttons.sbutton("🔒 Close", f"closeset {user_id}")
@@ -47,7 +47,7 @@ def setLeechType(update, context):
     data = query.data
     data = data.split(" ")
     if user_id != int(data[1]):
-        query.answer(text="Not Yours!", show_alert=True)
+        query.answer(text="🚫 Not Yours!", show_alert=True)
     elif data[0] == "doc":
         if (
             user_id in AS_DOC_USERS
@@ -58,27 +58,27 @@ def setLeechType(update, context):
         elif user_id in AS_MEDIA_USERS:
             AS_MEDIA_USERS.remove(user_id)
             AS_DOC_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="✅ Done!", show_alert=True)
         else:
             AS_DOC_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="✅ Done!", show_alert=True)
     elif data[0] == "med":
         if user_id in AS_DOC_USERS:
             AS_DOC_USERS.remove(user_id)
             AS_MEDIA_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="✅ Done!", show_alert=True)
         elif user_id in AS_MEDIA_USERS or not AS_DOCUMENT:
             query.answer(text="Already As Video!", show_alert=True)
         else:
             AS_MEDIA_USERS.add(user_id)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="✅ Done!", show_alert=True)
     elif data[0] == "thumb":
         path = f"Thumbnails/{user_id}.jpg"
         if os.path.lexists(path):
             os.remove(path)
-            query.answer(text="Done!", show_alert=True)
+            query.answer(text="✅ Done!", show_alert=True)
         else:
-            query.answer(text="No Thumbnail To Delete!", show_alert=True)
+            query.answer(text="💢 No Thumbnail To Delete!", show_alert=True)
     elif data[0] == "closeset":
         query.message.delete()
 
@@ -101,7 +101,7 @@ def setThumb(update, context):
         os.remove(photo_dir)
         sendMessage(f"🏞 Thumbnail saved for {first_name}.", context.bot, update)
     else:
-        sendMessage("Reply to a photo to save custom thumbnail.", context.bot, update)
+        sendMessage("🙄 Reply to a photo to save custom thumbnail.", context.bot, update)
 
 leech_set_handler = CommandHandler(BotCommands.LeechSetCommand, leechSet, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
 set_thumbnail_handler = CommandHandler(BotCommands.SetThumbCommand, setThumb, filters=CustomFilters.authorized_chat | CustomFilters.authorized_user, run_async=True)
