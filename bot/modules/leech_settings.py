@@ -42,37 +42,37 @@ def leechSet(update, context):
 
 def setLeechType(update, context):
     query = update.callback_query
-    first_name = query.from_user.first_name
+    user_id = query.from_user.id
     data = query.data
     data = data.split(" ")
-    if first_name != int(data[1]):
+    if user_id != int(data[1]):
         query.answer(text="🚫 Not Yours!", show_alert=True)
     elif data[0] == "doc":
         if (
-            first_name in AS_DOC_USERS
-            or first_name not in AS_MEDIA_USERS
+            user_id in AS_DOC_USERS
+            or user_id not in AS_MEDIA_USERS
             and AS_DOCUMENT
         ):
             query.answer(text="Already As Document!", show_alert=True)
-        elif first_name in AS_MEDIA_USERS:
-            AS_MEDIA_USERS.remove(first_name)
-            AS_DOC_USERS.add(first_name)
-            query.answer(text="✅ Done!", show_alert=True)
+        elif user_id in AS_MEDIA_USERS:
+            AS_MEDIA_USERS.remove(user_id)
+            AS_DOC_USERS.add(user_id)
+            query.answer(text="Done!", show_alert=True)
         else:
-            AS_DOC_USERS.add(first_name)
+            AS_DOC_USERS.add(user_id)
             query.answer(text="✅ Done!", show_alert=True)
     elif data[0] == "med":
-        if first_name in AS_DOC_USERS:
-            AS_DOC_USERS.remove(first_name)
-            AS_MEDIA_USERS.add(first_name)
+        if user_id in AS_DOC_USERS:
+            AS_DOC_USERS.remove(user_id)
+            AS_MEDIA_USERS.add(user_id)
             query.answer(text="✅ Done!", show_alert=True)
-        elif first_name in AS_MEDIA_USERS or not AS_DOCUMENT:
-            query.answer(text="Already As Video!", show_alert=True)
+        elif user_id in AS_MEDIA_USERS or not AS_DOCUMENT:
+            query.answer(text="Already As Media!", show_alert=True)
         else:
-            AS_MEDIA_USERS.add(first_name)
+            AS_MEDIA_USERS.add(user_id)
             query.answer(text="✅ Done!", show_alert=True)
     elif data[0] == "thumb":
-        path = f"Thumbnails/{first_name}.jpg"
+        path = f"Thumbnails/{user_id}.jpg"
         if os.path.lexists(path):
             os.remove(path)
             query.answer(text="✅ Done!", show_alert=True)
