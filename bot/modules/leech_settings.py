@@ -98,7 +98,7 @@ def setThumb(update, context):
         # img.resize((320, h))
         img.save(des_dir, "JPEG")
         os.remove(photo_dir)
-        sendMessage(f"🏞 Custom thumbnail ✅ saved for {first_name}.", context.bot, update)
+        sendMessage(f"🏞 Thumbnail saved for {first_name}.", context.bot, update)
     else:
         sendMessage("Reply to a photo to save custom thumbnail.", context.bot, update)
 
