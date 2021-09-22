@@ -18,6 +18,7 @@ from bot.helper.telegram_helper import button_build
 
 def leechSet(update, context):
     user_id = update.message.from_user.id
+    first_name = update.message.from_user.first_name
     path = f"Thumbnails/{user_id}.jpg"
     msg = f"Leech Type for {user_id} user is "
     if (
