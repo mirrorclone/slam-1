@@ -17,12 +17,12 @@ from bot.helper.telegram_helper import button_build
 
 
 def leechSet(update, context):
-    first_name = update.message.from_user.first_name
-    path = f"Thumbnails/{first_name}.jpg"
-    msg = f"Files Format for {first_name} = "
+    user_id = update.message.from_user.id
+    path = f"Thumbnails/{user_id}.jpg"
+    msg = f"Files Format for {user_id} = "
     if (
-        first_name in AS_DOC_USERS
-        or first_name not in AS_MEDIA_USERS
+        user_id in AS_DOC_USERS
+        or user_id not in AS_MEDIA_USERS
         and AS_DOCUMENT
     ):
         msg += "As DOCUMENT"
@@ -31,11 +31,11 @@ def leechSet(update, context):
     msg += "\nCustom Thmubnail "
     msg += "exists" if os.path.exists(path) else "not exists"
     buttons = button_build.ButtonMaker()
-    buttons.sbutton("📁 As Document", f"doc {first_name}")
-    buttons.sbutton("🎞 As Streamable", f"med {first_name}")
-    buttons.sbutton("💢 Delete Thumbnail", f"thumb {first_name}")
+    buttons.sbutton("📁 As Document", f"doc {user_id}")
+    buttons.sbutton("🎞 As Streamable", f"med {user_id}")
+    buttons.sbutton("💢 Delete Thumbnail", f"thumb {user_id}")
     if AUTO_DELETE_MESSAGE_DURATION == -1:
-        buttons.sbutton("🔒 Close", f"closeset {first_name}")
+        buttons.sbutton("🔒 Close", f"closeset {user_id}")
     button = InlineKeyboardMarkup(buttons.build_menu(2))
     choose_msg = sendMarkup(msg, context.bot, update, button)
     threading.Thread(target=auto_delete_message, args=(context.bot, update.message, choose_msg)).start()
