@@ -29,6 +29,7 @@ class MirrorStatus:
     STATUS_PAUSE = "ᴘᴀᴜsᴇᴅ ⭕️"
     STATUS_ARCHIVING = "ᴀʀᴄʜɪᴠᴇ 🔐"
     STATUS_EXTRACTING = "ᴇxᴛʀᴀᴄᴛ 📂"
+    STATUS_SPLITTING = "sᴘʟɪᴛ✂️"
     
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -50,7 +51,6 @@ class setInterval:
     def cancel(self):
         self.stopEvent.set()
 
-
 def get_readable_file_size(size_in_bytes) -> str:
     if size_in_bytes is None:
         return '0B'
@@ -63,7 +63,6 @@ def get_readable_file_size(size_in_bytes) -> str:
     except IndexError:
         return 'File too large'
 
-
 def getDownloadByGid(gid):
     with download_dict_lock:
         for dl in download_dict.values():
@@ -73,12 +72,12 @@ def getDownloadByGid(gid):
                 not in [
                     MirrorStatus.STATUS_ARCHIVING,
                     MirrorStatus.STATUS_EXTRACTING,
+                    MirrorStatus.STATUS_SPLITTING
                 ]
                 and dl.gid() == gid
             ):
                 return dl
     return None
-
 
 def getAllDownload():
     with download_dict_lock:
@@ -89,8 +88,9 @@ def getAllDownload():
                 not in [
                     MirrorStatus.STATUS_ARCHIVING,
                     MirrorStatus.STATUS_EXTRACTING,
+                    MirrorStatus.STATUS_SPLITTING,
                     MirrorStatus.STATUS_CLONING,
-                    MirrorStatus.STATUS_UPLOADING,
+                    MirrorStatus.STATUS_UPLOADING
                 ]
                 and dlDetails
             ):
@@ -100,7 +100,7 @@ def getAllDownload():
 def get_readable_message():
     with download_dict_lock:
         msg = ""
-        INDEX = 0
+        start = 0
         if STATUS_LIMIT is not None:
             dick_no = len(download_dict)
             global pages
