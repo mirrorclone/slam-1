@@ -103,21 +103,21 @@ help_string_telegraph = f'''<br>
 <br><br>
 <b>/{BotCommands.QbUnzipMirrorCommand}</b> [magnet_link/torrent_file]: Starts mirroring using qBittorrent and if downloaded file is any archive, extracts it to Google Drive
 <br><br>
-<b>/{BotCommands.LeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.LeechCommand}</b>: [download_url]: Start leeching to Telegram, Use <b>/{BotCommands.LeechCommand}</b> s</b> to select files before leeching
 <br><br>
-<b>/{BotCommands.TarLeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.tar). [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.TarLeechCommand}</b>: [download_url]:  Start leeching to Telegram and upload it as (.tar)
 <br><br>
-<b>/{BotCommands.ZipLeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.zip). [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.ZipLeechCommand}</b>: [download_url]: Start leeching to Telegram and upload it as (.zip)
 <br><br>
-<b>/{BotCommands.UnzipLeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link and if file is any archive, extracts it. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.UnzipLeechCommand}</b>: [download_url]: Start leeching to Telegram and if downloaded file is any archive, extracts it to Telegram
 <br><br>
-<b>/{BotCommands.QbLeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbLeechCommand}</b>: [magnet_link]: Start leeching to Telegram using qBittorrent, Use <b>/{BotCommands.QbLeechCommand} s</b> to select files before leeching
 <br><br>
-<b>/{BotCommands.QbTarLeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.tar) using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbTarLeechCommand}</b>: [magnet_link]: Start leeching to Telegram using qBittorrent and upload it as (.tar)
 <br><br>
-<b>/{BotCommands.QbZipLeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link and upload it as (.zip) using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbZipLeechCommand}</b>: [magnet_link]: Start leeching to Telegram using qBittorrent and upload it as (.zip)
 <br><br>
-<b>/{BotCommands.QbUnzipLeechCommand}</b>: This command should be used as reply to Magnet link, Torrent link, or Direct link and if file is any archive, extracts it using qBittorrent. [this command will SPAM the chat and send the downloads a seperate files, if there is more than one file, in the specified Torrent]
+<b>/{BotCommands.QbUnzipLeechCommand}</b>: [magnet_link]: Start leeching to Telegram using qBittorrent and if downloaded file is any archive, extracts it to Telegram
 <br><br>
 <b>/{BotCommands.CloneCommand}</b> [drive_url]: Copy file/folder to Google Drive
 <br><br>
