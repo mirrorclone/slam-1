@@ -111,7 +111,7 @@ def get_readable_message():
             start = COUNT
         for index, download in enumerate(list(download_dict.values())[start:], start=1):
                 msg += f"\n════════ ᴀᴢ ════════"
-                msg += f"\n\n<b>📝 sᴛᴀᴛᴜs:</b> <i>{download.status()}</i> {download.progress()}"
+                msg += f"\n\n<b>📝 sᴛᴀᴛᴜs:</b> <i>{download.status()}</i> <b>{download.progress()}</b>"
                 msg += f"\n<b>📁 ɴᴀᴍᴇ:</b> <code>{download.name()}</code>"       
                 if download.status() not in [
                     MirrorStatus.STATUS_ARCHIVING,
