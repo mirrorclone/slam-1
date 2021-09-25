@@ -33,8 +33,8 @@ def stats(update, context):
     disk = psutil.disk_usage('/').percent
     stats = f'<b>⏰ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ:</b> <code>{currentTime}</code>\n' \
             f'<b>💾 ᴛᴏᴛᴀʟ ᴅɪsᴋ sᴘᴀᴄᴇ:</b> <code>{total}</code>\n' \
-            f'<b>⛔️ ᴜsᴇᴅ:</b> <code>{used}</code> ' \
-            f'<b>✅ ғʀᴇᴇ:</b> <code>{free}</code>\n\n' \
+            f'<b>✅ ғʀᴇᴇ:</b> <code>{free}</code>\n' \
+            f'<b>⛔️ ᴜsᴇᴅ:</b> <code>{used}</code>\n' \         
             f'<b>🔺 ᴜᴘʟᴏᴀᴅ:</b> <code>{sent}</code>\n' \
             f'<b>🔻 ᴅᴏᴡɴʟᴏᴀᴅ:</b> <code>{recv}</code>'         
     sendMessage(stats, context.bot, update)
