@@ -580,7 +580,7 @@ class GoogleDriveHelper:
                 LOGGER.info("Authorize with token.pickle")
                 with open(self.__G_DRIVE_TOKEN_FILE, 'rb') as f:
                     credentials = pickle.load(f)
-            if credentials is None or not credentials.valid:
+                if credentials is None or not credentials.valid:
                     if credentials and credentials.expired and credentials.refresh_token:
                         credentials.refresh(Request())
                     else:
@@ -588,14 +588,13 @@ class GoogleDriveHelper:
                             'credentials.json', self.__OAUTH_SCOPE)
                         LOGGER.info(flow)
                         credentials = flow.run_console(port=0)
-                        
                     # Save the credentials for the next run
                     with open(self.__G_DRIVE_TOKEN_FILE, 'wb') as token:
                         pickle.dump(credentials, token)
                 return build('drive', 'v3', credentials=credentials, cache_discovery=False)
         return None
+            
         
-
     def edit_telegraph(self):
         nxt_page = 1 
         prev_page = 0
