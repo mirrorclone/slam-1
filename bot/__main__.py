@@ -31,12 +31,16 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'\n<b>⏰ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ:</b> <code>{currentTime}</code>'
-            f'\n<b>💾 ᴛᴏᴛᴀʟ ᴅɪsᴋ sᴘᴀᴄᴇ:</b> <code>{total}</code>'
-            f'\n<b>✅ ғʀᴇᴇ:</b> <code>{free}</code>'
-            f'\n<b>⛔️ ᴜsᴇᴅ:</b> <code>{used}</code>'        
-            f'\n<b>🔺 ᴜᴘʟᴏᴀᴅ:</b> <code>{sent}</code>'
-            f'\n<b>🔻 ᴅᴏᴡɴʟᴏᴀᴅ:</b> <code>{recv}</code>'         
+    stats = f'<b>╭──「⭕️ BOT STATISTICS ⭕️」</b>\n' \
+            f'<b>│</b>\n' \
+            f'<b>├  ⏰ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ : {currentTime}</b>\n' \
+            f'<b>├  💾 ᴛᴏᴛᴀʟ ᴅɪsᴋ sᴘᴀᴄᴇ : {total}</b>\n' \
+            f'<b>├  📀 ᴛᴏᴛᴀʟ ᴜsᴇᴅ sᴘᴀᴄᴇ : {used}</b>\n' \
+            f'<b>├  💿 ᴛᴏᴛᴀʟ ғʀᴇᴇ sᴘᴀᴄᴇ : {free}</b>\n' \
+            f'<b>├  🔼 ᴛᴏᴛᴀʟ ᴜᴘʟᴏᴀᴅ : {sent}</b>\n' \
+            f'<b>├  🔽 ᴛᴏᴛᴀʟ ᴅᴏᴡɴʟᴏᴀᴅ : {recv}</b>\n' \    
+            f'<b>│</b>\n' \
+            f'<b>╰──「 🚸 ᴀᴢ 🚸 」</b>'         
     sendMessage(stats, context.bot, update)
 
 
