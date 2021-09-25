@@ -31,7 +31,7 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>⏰ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ:</b> <code>{currentTime}</code>'
+    stats = f'\n<b>⏰ ʙᴏᴛ ᴜᴘᴛɪᴍᴇ:</b> <code>{currentTime}</code>'
             f'\n<b>💾 ᴛᴏᴛᴀʟ ᴅɪsᴋ sᴘᴀᴄᴇ:</b> <code>{total}</code>'
             f'\n<b>✅ ғʀᴇᴇ:</b> <code>{free}</code>'
             f'\n<b>⛔️ ᴜsᴇᴅ:</b> <code>{used}</code>'        
