@@ -668,7 +668,7 @@ class GoogleDriveHelper:
                         )
                         .execute()
                     )
-                else:
+             else:
                     return (
                         self.__service.files()
                         .list(supportsTeamDrives=True,
@@ -682,7 +682,7 @@ class GoogleDriveHelper:
                             orderBy='folder, name asc'
                         )
                         .execute()
-                    )                  
+                    )                 
             else:
                 if self.stopDup:
                     query = f"'{parent_id}' in parents and name = '{fileName}' and "
