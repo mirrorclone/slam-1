@@ -131,7 +131,7 @@ class GoogleDriveHelper:
                                      resumable=False)
         file_metadata = {
             'name': file_name,
-            'description': 'Uploaded using AZ Mirrorbot',
+            'description': 'Uploaded using Slam Mirrorbot',
             'mimeType': mime_type,
         }
         if parent_id is not None:
@@ -190,7 +190,7 @@ class GoogleDriveHelper:
         # File body description
         file_metadata = {
             'name': file_name,
-            'description': 'Uploaded by AZ Mirrorbot',
+            'description': 'Uploaded by Slam Mirrorbot',
             'mimeType': mime_type,
         }
         try:
@@ -405,41 +405,41 @@ class GoogleDriveHelper:
                     msg = self.deletefile(durl)
                     LOGGER.info(f"{msg}")
                     return "your clone has been stopped and cloned data has been deleted!", "cancelled"
-                msg += f'<b>📂 ɴᴀᴍᴇ: </b><code>{meta.get("name")}</code>\n<b>💽 sɪᴢᴇ: </b><code>{get_readable_file_size(self.transferred_size)}</code>'
-                msg += '\n<b>📇 ᴛʏᴘᴇ: </b><code>Folder</code>'
-                msg += f'\n<b>🗃 sᴜʙғᴏʟᴅᴇʀs: </b><code>{self.total_folders}</code>'
-                msg += f'\n<b>🗄 ғɪʟᴇs: </b><code>{self.total_files}</code>'
+                msg += f'<b>Filename: </b><code>{meta.get("name")}</code>\n<b>Size: </b><code>{get_readable_file_size(self.transferred_size)}</code>'
+                msg += '\n<b>Type: </b><code>Folder</code>'
+                msg += f'\n<b>SubFolders: </b><code>{self.total_folders}</code>'
+                msg += f'\n<b>Files: </b><code>{self.total_files}</code>'
                 buttons = button_build.ButtonMaker()
                 if SHORTENER is not None and SHORTENER_API is not None:
                     surl = short_url(durl)
-                    buttons.buildbutton("☁️ ᴅʀɪᴠᴇ ʟɪɴᴋ", surl)
+                    buttons.buildbutton("☁️ Drive Link", surl)
                 else:
-                    buttons.buildbutton("☁️ ᴅʀɪᴠᴇ ʟɪɴᴋ", durl)
+                    buttons.buildbutton("☁️ Drive Link", durl)
                 if INDEX_URL is not None:
                     url_path = requests.utils.quote(f'{meta.get("name")}')
                     url = f'{INDEX_URL}/{url_path}/'
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = short_url(url)
-                        buttons.buildbutton("⚡ ɪɴᴅᴇx ʟɪɴᴋ", siurl)
+                        buttons.buildbutton("⚡ Index Link", siurl)
                     else:
-                        buttons.buildbutton("⚡ ɪɴᴅᴇx ʟɪɴᴋ", url)
+                        buttons.buildbutton("⚡ Index Link", url)
             else:
                 file = self.copyFile(meta.get('id'), parent_id)
-                msg += f'<b>📂 ɴᴀᴍᴇ: </b><code>{file.get("name")}</code>'
+                msg += f'<b>Filename: </b><code>{file.get("name")}</code>'
                 durl = self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))
                 buttons = button_build.ButtonMaker()
                 if SHORTENER is not None and SHORTENER_API is not None:
                     surl = short_url(durl)
-                    buttons.buildbutton("☁️ ᴅʀɪᴠᴇ ʟɪɴᴋ", surl)
+                    buttons.buildbutton("☁️ Drive Link", surl)
                 else:
-                    buttons.buildbutton("☁️ ᴅʀɪᴠᴇ ʟɪɴᴋ", durl)
+                    buttons.buildbutton("☁️ Drive Link", durl)
                 try:
                     typ = file.get('mimeType')
                 except:
                     typ = 'File'
                 try:
-                    msg += f'\n<b>💽 sɪᴢᴇ: </b><code>{get_readable_file_size(int(meta.get("size")))}</code>'
-                    msg += f'\n<b>📇 ᴛʏᴘᴇ: </b><code>{typ}</code>'
+                    msg += f'\n<b>Size: </b><code>{get_readable_file_size(int(meta.get("size")))}</code>'
+                    msg += f'\n<b>Type: </b><code>{typ}</code>'
                 except TypeError:
                     pass
                 if INDEX_URL is not None:
@@ -448,14 +448,14 @@ class GoogleDriveHelper:
                     urls = f'{INDEX_URL}/{url_path}?a=view'
                     if SHORTENER is not None and SHORTENER_API is not None:
                         siurl = short_url(url)
-                        buttons.buildbutton("⚡ ɪɴᴅᴇx ʟɪɴᴋ", siurl)
+                        buttons.buildbutton("⚡ Index Link", siurl)
                         if VIEW_LINK:
                             siurls = short_url(urls)
-                            buttons.buildbutton("🌐 ᴠɪᴇᴡ ʟɪɴᴋ 🌐", siurls)
+                            buttons.buildbutton("🌐 View Link", siurls)
                     else:
-                        buttons.buildbutton("⚡ ɪɴᴅᴇx ʟɪɴᴋ", url)
+                        buttons.buildbutton("⚡ Index Link", url)
                         if VIEW_LINK:
-                            buttons.buildbutton("🌐 ᴠɪᴇᴡ ʟɪɴᴋ 🌐", urls)
+                            buttons.buildbutton("🌐 View Link", urls)
             if BUTTON_FOUR_NAME is not None and BUTTON_FOUR_URL is not None:
                 buttons.buildbutton(f"{BUTTON_FOUR_NAME}", f"{BUTTON_FOUR_URL}")
             if BUTTON_FIVE_NAME is not None and BUTTON_FIVE_URL is not None:
@@ -571,7 +571,7 @@ class GoogleDriveHelper:
                 f'accounts/{SERVICE_ACCOUNT_INDEX}.json',
                 scopes=self.__OAUTH_SCOPE)
         return build('drive', 'v3', credentials=credentials, cache_discovery=False)
-    
+
     def alt_authorize(self):
         credentials = None
         if USE_SERVICE_ACCOUNTS and not self.alt_auth:
@@ -593,8 +593,8 @@ class GoogleDriveHelper:
                         pickle.dump(credentials, token)
                 return build('drive', 'v3', credentials=credentials, cache_discovery=False)
         return None
-            
-        
+
+
     def edit_telegraph(self):
         nxt_page = 1 
         prev_page = 0
@@ -610,9 +610,9 @@ class GoogleDriveHelper:
                     content += f'<b> | <a href="https://telegra.ph/{self.path[nxt_page]}">Next</a></b>'
                     nxt_page += 1
             Telegraph(access_token=telegraph_token).edit_page(path = self.path[prev_page],
-                                 title = 'AZ Mirrorbot Search',
-                                 author_name='AZ Mirrorbot',
-                                 author_url='https://github.com/shivayn7/slam',
+                                 title = 'Slam Mirrorbot Search',
+                                 author_name='Slam Mirrorbot',
+                                 author_url='https://github.com/SlamDevs/slam-mirrorbot',
                                  html_content=content)
         return
 
@@ -656,8 +656,8 @@ class GoogleDriveHelper:
                         if name != ''
                     )
 
-            query += "trashed = false"
-            if parent_id == "root":
+                query += "trashed = false"
+                if parent_id == "root":
                     return (
                         self.__service.files()
                         .list(q=query + " and 'me' in owners",
@@ -668,7 +668,7 @@ class GoogleDriveHelper:
                         )
                         .execute()
                     )
-             else:
+                else:
                     return (
                         self.__service.files()
                         .list(supportsTeamDrives=True,
@@ -682,7 +682,7 @@ class GoogleDriveHelper:
                             orderBy='folder, name asc'
                         )
                         .execute()
-                    )                 
+                    )
             else:
                 if self.stopDup:
                     query = f"'{parent_id}' in parents and name = '{fileName}' and "
@@ -697,8 +697,8 @@ class GoogleDriveHelper:
                     self.__service.files()
                     .list(
                         supportsTeamDrives=True,
-                        includeTeamDriveItems=True,                      
-                        q=query,                     
+                        includeTeamDriveItems=True,
+                        q=query,
                         spaces='drive',
                         pageSize=200,
                         fields='files(id, name, mimeType, size)',
@@ -807,9 +807,9 @@ class GoogleDriveHelper:
 
         for content in self.telegraph_content :
             self.path.append(Telegraph(access_token=telegraph_token).create_page(
-                                                    title = 'AZ Mirrorbot Search',
-                                                    author_name='AZ Mirrorbot',
-                                                    author_url='https://github.com/shivayn7/slam',
+                                                    title = 'Slam Mirrorbot Search',
+                                                    author_name='Slam Mirrorbot',
+                                                    author_url='https://github.com/SlamDevs/slam-mirrorbot',
                                                     html_content=content
                                                     )['path'])
 
@@ -839,13 +839,13 @@ class GoogleDriveHelper:
             LOGGER.info(f"Counting: {name}")
             if drive_file['mimeType'] == self.__G_DRIVE_DIR_MIME_TYPE:
                 self.gDrive_directory(**drive_file)
-                msg += f'<b>📂 ɴᴀᴍᴇ: </b><code>{name}</code>'
-                msg += f'\n<b>💽 sɪᴢᴇ: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
-                msg += '\n<b>📇 ᴛʏᴘᴇ: </b><code>Folder</code>'
-                msg += f'\n<b>🗃 sᴜʙғᴏʟᴅᴇʀs: </b><code>{self.total_folders}</code>'
-                msg += f'\n<b>🗄 ғɪʟᴇs: </b><code>{self.total_files}</code>'
+                msg += f'<b>Filename: </b><code>{name}</code>'
+                msg += f'\n<b>Size: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
+                msg += '\n<b>Type: </b><code>Folder</code>'
+                msg += f'\n<b>SubFolders: </b><code>{self.total_folders}</code>'
+                msg += f'\n<b>Files: </b><code>{self.total_files}</code>'
             else:
-                msg += f'<b>📂 ɴᴀᴍᴇ: </b><code>{name}</code>'
+                msg += f'<b>Filename: </b><code>{name}</code>'
                 try:
                     typee = drive_file['mimeType']
                 except:
@@ -853,9 +853,9 @@ class GoogleDriveHelper:
                 try:
                     self.total_files += 1
                     self.gDrive_file(**drive_file)
-                    msg += f'\n<b>💽 sɪᴢᴇ: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
-                    msg += f'\n<b>📇 ᴛʏᴘᴇ: </b><code>{typee}</code>'
-                    msg += f'\n<b>🗄 ғɪʟᴇs: </b><code>{self.total_files}</code>'
+                    msg += f'\n<b>Size: </b><code>{get_readable_file_size(self.total_bytes)}</code>'
+                    msg += f'\n<b>Type: </b><code>{typee}</code>'
+                    msg += f'\n<b>Files: </b><code>{self.total_files}</code>'
                 except TypeError:
                     pass
         except Exception as err:
@@ -947,7 +947,7 @@ class GoogleDriveHelper:
             LOGGER.error(err)
             if "downloadQuotaExceeded" in str(err):
                 err = "Download Quota Exceeded."
-             elif "File not found" in str(err):
+            elif "File not found" in str(err):
                 token_service = self.alt_authorize()
                 if token_service is not None:
                     self.__service = token_service
