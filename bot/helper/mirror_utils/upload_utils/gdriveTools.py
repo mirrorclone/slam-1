@@ -657,7 +657,7 @@ class GoogleDriveHelper:
                     )
 
             query += "trashed = false"
-                if parent_id == "root":
+            if parent_id == "root":
                     return (
                         self.__service.files()
                         .list(q=query + " and 'me' in owners",
